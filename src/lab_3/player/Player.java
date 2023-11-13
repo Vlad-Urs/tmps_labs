@@ -1,14 +1,18 @@
 package lab_3.player;
 
-import lab_3.CharacterSkills;
+import lab_3.CharacterSkillsGroup;
 import lab_3.skills.Skill;
 
 public interface Player {
-    void addSkill(Skill skill);
+    void addMagicSkill(Skill skill);
+
+    void addPhysicalSKill(Skill skill);
+
     void removeSkill(String skillName);
     void displayPlayer();
     String getName();
     String getRace();
 
-    CharacterSkills getSkills();
+    CharacterSkillsGroup getMagicSkills();
+    CharacterSkillsGroup getPhysicalSkills();
 }

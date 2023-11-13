@@ -1,7 +1,6 @@
 package lab_3.player;
 
-import lab_3.CharacterSkills;
-import lab_3.player.PlayerCharacter;
+import lab_3.CharacterSkillsGroup;
 import lab_3.skills.Skill;
 
 public class PlayerCharacterProxy implements Player {
@@ -13,11 +12,19 @@ public class PlayerCharacterProxy implements Player {
     }
 
     @Override
-    public void addSkill(Skill skill) {
+    public void addMagicSkill(Skill skill) {
         if (realPlayerCharacter == null) {
             realPlayerCharacter = new PlayerCharacter(getName(), getRace());
         }
-        realPlayerCharacter.addSkill(skill);
+        realPlayerCharacter.addMagicSkill(skill);
+    }
+
+    @Override
+    public void addPhysicalSKill(Skill skill) {
+        if (realPlayerCharacter == null) {
+            realPlayerCharacter = new PlayerCharacter(getName(), getRace());
+        }
+        realPlayerCharacter.addPhysicalSKill(skill);
     }
 
     @Override
@@ -47,8 +54,15 @@ public class PlayerCharacterProxy implements Player {
     }
 
     @Override
-    public CharacterSkills getSkills() {
-        return realPlayerCharacter.getSkills();
+    public CharacterSkillsGroup getMagicSkills() {
+        return realPlayerCharacter.getMagicSkills();
     }
+
+    @Override
+    public CharacterSkillsGroup getPhysicalSkills() {
+        return realPlayerCharacter.getPhysicalSkills();
+    }
+
+
 }
 

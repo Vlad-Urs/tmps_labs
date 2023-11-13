@@ -123,8 +123,7 @@ more, while maintaining an extra layer of control over these operations.
 ```java
 package lab_3.player;
 
-import lab_3.CharacterSkills;
-import lab_3.player.PlayerCharacter;
+import lab_3.CharacterSkillsGroup;
 import lab_3.skills.Skill;
 
 public class PlayerCharacterProxy implements Player {
@@ -170,7 +169,7 @@ public class PlayerCharacterProxy implements Player {
     }
 
     @Override
-    public CharacterSkills getSkills() {
+    public CharacterSkillsGroup getSkills() {
         return realPlayerCharacter.getSkills();
     }
 }

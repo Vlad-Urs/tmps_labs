@@ -84,7 +84,8 @@ public class Main {
                 }
 
                 else if (playerInput == 4){
-                    player.setSkills(facade.getPlayerProxy().getSkills());
+                    player.setMagicSkills(facade.getPlayerProxy().getMagicSkills());
+                    player.setPhysicalSkills(facade.getPlayerProxy().getPhysicalSkills());
                 }
 
                 else if (playerInput == 5){

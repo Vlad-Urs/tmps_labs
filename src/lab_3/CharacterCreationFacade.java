@@ -14,12 +14,12 @@ public class CharacterCreationFacade {
 
     public void addMagicSkill(String spellName, int spellDamage, String spellType) {
         Magic newSpell = new Magic(spellName, spellDamage, spellType);
-        playerProxy.addSkill(newSpell);
+        playerProxy.addMagicSkill(newSpell);
     }
 
     public void addPhysicalSkill(String attName, int attDamage, String weaponType) {
         Physical newPhys = new Physical(attName, attDamage, weaponType);
-        playerProxy.addSkill(newPhys);
+        playerProxy.addPhysicalSKill(newPhys);
     }
 
     public void removeSkill(String skillName) {

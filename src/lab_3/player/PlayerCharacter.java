@@ -1,6 +1,6 @@
 package lab_3.player;
 
-import lab_3.CharacterSkills;
+import lab_3.CharacterSkillsGroup;
 import lab_3.EquippableItem;
 import lab_3.skills.Skill;
 
@@ -9,25 +9,24 @@ import java.util.Objects;
 public class PlayerCharacter implements Player{
     private String name;
     private String race;
-    private CharacterSkills skills;
+    private CharacterSkillsGroup magicSkills;
+    private CharacterSkillsGroup physicalSkills;
 
 
 
     public PlayerCharacter(String name, String race){
         this.name = name;
         this.race = race;
-        this.skills = new CharacterSkills();
+        this.magicSkills = new CharacterSkillsGroup("Magic");
+        this.physicalSkills = new CharacterSkillsGroup("Physical");
     }
 
     public void displayPlayer(){
         System.out.println("Player Name: " + name);
         System.out.println("Player Race: " + race);
-        if (skills != null) {
-            skills.showSkills();
-        }
-        else {
-            System.out.println("Player has no skills");
-        }
+        magicSkills.showSkills();
+        physicalSkills.showSkills();
+
     }
 
     public String getName() {
@@ -46,28 +45,59 @@ public class PlayerCharacter implements Player{
         this.race = race;
     }
 
-    public CharacterSkills getSkills() {
-        return skills;
+    //public CharacterSkillsGroup getSkills() {
+       // return skills;
+    //}
+
+    public void addMagicSkill(Skill skill){
+        magicSkills.addSkill(skill);
     }
 
-    public void addSkill(Skill skill){
-        skills.addSkill(skill);
+    public void addPhysicalSKill(Skill skill){
+        physicalSkills.addSkill(skill);
     }
 
     public void removeSkill(String skillName){
-        skills.removeSkill(skillName);
+        if (!magicSkills.removeSkill(skillName)) {
+            physicalSkills.removeSkill(skillName);
+        }
     }
 
-    public void setSkills(CharacterSkills newSkills) {
-        skills = newSkills;
+    public void setMagicSkills(CharacterSkillsGroup magicSkills) {
+        this.magicSkills = magicSkills;
     }
 
-    public void useItem(EquippableItem item){
-        for (Skill skill : skills.getSkills()){
+    public void setPhysicalSkills(CharacterSkillsGroup physicalSkills) {
+        this.physicalSkills = physicalSkills;
+    }
+
+    public int useItem(EquippableItem item){
+        for (Skill skill : magicSkills.getSkills()){
             if (Objects.equals(skill.getType(), item.getBoostedSkillType())){
                 skill.applyItemBoost(item.getBoostAmount());
                 System.out.println("Item buff added");
+                return 0;
             }
         }
+
+        for (Skill skill : physicalSkills.getSkills()){
+            if (Objects.equals(skill.getType(), item.getBoostedSkillType())){
+                skill.applyItemBoost(item.getBoostAmount());
+                System.out.println("Item buff added");
+                return 0;
+            }
+        }
+
+        return 0;
     }
+
+    public CharacterSkillsGroup getMagicSkills() {
+        return magicSkills;
+    }
+
+    public CharacterSkillsGroup getPhysicalSkills() {
+        return physicalSkills;
+    }
+
+
 }
